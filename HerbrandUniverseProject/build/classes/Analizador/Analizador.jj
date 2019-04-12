@@ -1,0 +1,99 @@
+options{
+  Ignore_Case = true;
+	static=false;
+}
+
+PARSER_BEGIN(Analizador)
+package Analizador;
+import java.util.ArrayList;
+
+public class Analizador {
+  public static ArrayList<String> listaTokens = new ArrayList();
+  public static ArrayList<String> listaConstantes = new ArrayList();
+  public static ArrayList<String> listafunciones = new ArrayList();
+}
+
+PARSER_END(Analizador)
+
+void Input() :
+{}
+{
+ (<INICIO>|<LLAVEIZQ>|<PARENTEIZQ>|<PARENTEDER>|<COMA>|<NEGACION>|<CONSTANTE>|<LETRAPREDICADO>|<LETRAVARIABLE>|<LETRAFUNCION>)*
+}
+
+TOKEN:
+{
+    <INICIO:	   "S=">{System.out.println("Token:  INICIO---> " + image);
+                    Analizador.listaTokens.add("Token:  INICIO---> " + image);
+                    }
+    |<LLAVEIZQ:	    "{">{System.out.println("Token:  LLAVEIZQ---> " + image);
+                    Analizador.listaTokens.add("Token:  LLAVEIZQ---> " + image);
+                    }
+    |<LLAVEDER:	    "}">{System.out.println("Token:  LLAVEDER---> " +image);
+                    Analizador.listaTokens.add("Token:  LLAVEDER---> " + image);
+                    }
+    |<PARENTEIZQ:   "(">{System.out.println("Token:  PARENTEIZQ---> " +image);
+                    Analizador.listaTokens.add("Token:  PARENTEIZQ---> " + image);
+                    }
+    |<PARENTEDER:   ")">{System.out.println("Token:  PARENTEDER---> " +image);
+                    Analizador.listaTokens.add("Token:  PARENTEDER---> " + image);
+                    }
+    |<COMA:	    ",">{System.out.println("Token:  COMA---> " +image);
+                    Analizador.listaTokens.add("Token:  COMA---> " + image);
+                    }
+    |<NEGACION:	    "~">{System.out.println("Token:  NEGACION---> " +image);
+                    Analizador.listaTokens.add("Token:  NEGACION---> " + image);
+                    }
+    |<CONSTANTE:   (["a"-"e"])>{System.out.println("Token:  CONSTANTE---> " +image);
+                    Analizador.listaTokens.add("Token:  CONSTANTE---> " + image);
+                    }
+    |<LETRAPREDICADO:	(["P"-"Z"])>{System.out.println("Token:  LETRAPREDICADO---> " +image);
+                    Analizador.listaTokens.add("Token:  LETRAPREDICADO---> " + image);
+                    }
+    |<LETRAVARIABLE:	(["w"-"z"])+>{System.out.println("Token:  LETRAVARIABLE---> " +image);
+                    Analizador.listaTokens.add("Token:  LETRAVARIABLE---> " + image);
+                    }   
+    |<LETRAFUNCION:    (["f"-"k"])+>{System.out.println("Token:  LETRAFUNCION---> " +image);
+                    Analizador.listaTokens.add("Token:  LETRAFUNCION---> " + image);
+                    }   
+}
+
+SKIP:
+{
+    " "  | "\t" | "\n" | "\r\n"
+}
+
+void iniciar() :{}
+{
+   <INICIO><LLAVEIZQ>sentencias()<EOF>
+}
+
+void sentencias():{}
+{
+  <LLAVEIZQ>formula()(<COMA>sentencias()|<LLAVEDER>)
+}
+
+void formula() :{}
+{
+    (predicados()|funcion()|<CONSTANTE>)(<COMA>formula()|<LLAVEDER>)
+}
+
+void predicados() :{}
+{
+    <NEGACION><LETRAPREDICADO><PARENTEIZQ>inPredicados()|<LETRAPREDICADO><PARENTEIZQ>inPredicados()
+}
+
+void inPredicados():{}
+{
+    (funcion()|<CONSTANTE>|<LETRAVARIABLE>)(<COMA>inPredicados()|<PARENTEDER>)
+}
+
+void funcion() :{}
+{
+    <LETRAFUNCION><PARENTEIZQ>inFuncion()
+}
+
+void inFuncion():{}
+{
+    (funcion()|<CONSTANTE>|<LETRAVARIABLE>)(<COMA>inFuncion()|<PARENTEDER>)
+}

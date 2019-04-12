@@ -1,0 +1,354 @@
+options{
+    Ignore_Case = true; 
+	static=false;
+}
+
+PARSER_BEGIN(Analizador)
+package compilador;
+import java.util.ArrayList;
+
+public class Analizador {
+
+  public static ArrayList<String> listaTokens = new ArrayList();
+}
+
+PARSER_END(Analizador)
+
+ void Input() :
+{}
+{
+ (<IF>|<ELSE>|<READ>|<WRITE>|<SHOW>|<DO>|<WHILE>|<FOR>|<SEN>|<COSEN>|<TANG>|<CLASS>|<METD>|<FUNC>
+    |<PUNTOYCOMA>|<PARENTESISIZQ>|<PARENTESISDER>|<CORCHETEIZQ>|<CORCHETEDER>|<LLAVEIZQ>|<LLAVEDER>
+    |<MAS>|<MENOS>|<POR>|<DIVI>|<MENORK>|<MAYORK>|<MENORIGUALK>|<MAYORIGUALK>|<ASIG>|<IGUALA>|<DISTINTODE>|<MOD>|<POTEN>|<RAIZ>|<FACTORI>
+    |<INT>|<FLOAT>|<DOUBLE>|<CHAR>
+    |<AND>|<OR>
+    |<VARIABLE>|<CONST> | <PUNTO> | <RETURN>)*
+}
+
+TOKEN:
+{
+    <IF:	"Si">{System.out.println("Token:  IF---> " + image);
+                    Analizador.listaTokens.add("Token:  IF---> " + image);
+                    }
+    |<ELSE:	"Sino">{System.out.println("Token:  ELSE---> " +image);
+                    Analizador.listaTokens.add("Token:  Else---> " + image);
+                    }
+    |<READ:	"Leer">{System.out.println("Token:  READ---> " + image);
+                    Analizador.listaTokens.add("Token:  READ---> " + image);    
+                    }
+    |<WRITE:	"Escribir">{System.out.println("Token:  WRITE---> " + image);
+                    Analizador.listaTokens.add("Token:  WRITE---> " +image);    
+                    }
+    |<SHOW:     "Mostrar">{System.out.println("Token:  SHOW---> " + image);
+                    Analizador.listaTokens.add("Token:  SHOW---> " +image);    
+                    }
+    |<DO:	"Hacer">{System.out.println("Token:  DO---> " + image);
+                    Analizador.listaTokens.add("Token:  DO---> "  +image);    
+                    }
+    |<WHILE:	"Mientras">{System.out.println("Token:  WHILE---> " + image);
+                    Analizador.listaTokens.add("Token:  WHILE---> " + image);    
+                    }
+    |<FOR:	"En">{System.out.println("Token:  FOR---> " + image);
+                    Analizador.listaTokens.add("Token:  FOR---> " +image);    
+                    }
+    |<SEN:	"Sen">{System.out.println("Token:  SEN---> " + image);
+                    Analizador.listaTokens.add("Token:  SEN---> " + image);    
+                    }
+    |<COSEN:	"Cos">{System.out.println("Token:  COSEN---> " + image);
+                    Analizador.listaTokens.add("Token:  COSEN---> " + image);    
+                    }
+    |<TANG:	"Tan">{System.out.println("Token:  TANG---> " + image);
+                    Analizador.listaTokens.add("Token:  TANG---> " + image);    
+                    }
+    |<CLASS:	"Clase">{System.out.println("Token:  CLASS---> " + image);
+                    Analizador.listaTokens.add("Token:  CLASS---> " + image);    
+                    }
+    |<METD:	"Metodo">{System.out.println("Token:  METD---> " + image);
+                    Analizador.listaTokens.add("Token:  METD---> " + image);    
+                    }
+    |<FUNC:	"Funcion">{System.out.println("Token:  FUNC---> " + image);
+                    Analizador.listaTokens.add("Token:  FUNC---> " + image);    
+                    }
+    |<RETURN:   "Retorna">{System.out.println("Token:  RETURN---> " + image);
+                    Analizador.listaTokens.add("Token:  RETURN---> " + image);    
+                    }
+}
+
+TOKEN:
+{
+    <PUNTOYCOMA:	";">{System.out.println("Token:  PUNTOYCOMA---> " + image);
+                            Analizador.listaTokens.add("Token:  PUNTOYCOMA---> " + image);    
+                            }
+    |<PARENTESISIZQ: 	"(">{System.out.println("Token:  PARENTESISIZQ---> " + image);
+                            Analizador.listaTokens.add("Token:  PARENTESISIZQ---> " + image);    
+                            }
+    |<PARENTESISDER:	")">{System.out.println("Token:  PARENTESISDER---> " +image);
+                            Analizador.listaTokens.add("Token:  PARENTESISDER---> " + image);    
+                            }
+    |<CORCHETEIZQ:	"[">{System.out.println("Token:  CORCHETEIZQ---> " + image);
+                            Analizador.listaTokens.add("Token:  CORCHETEIZQ---> " + image);    
+                            }
+    |<CORCHETEDER:	"]">{System.out.println("Token:  CORCHETEDER---> " + image);
+                            Analizador.listaTokens.add("Token:  CORCHETEDER---> " + image);    
+                            }
+    |<LLAVEIZQ:         "{">{System.out.println("Token:  LLAVEIZQ---> " + image);
+                            Analizador.listaTokens.add("Token:  LLAVEIZQ---> " + image);    
+                            }
+    |<LLAVEDER:     	"}">{System.out.println("Token:  LLAVEDER---> " + image);
+                            Analizador.listaTokens.add("Token:  LLAVEIZQ---> " +image);    
+                            }
+
+}
+
+TOKEN:
+{
+    <MAS:	"+">{System.out.println("Token:  MAS---> " + image);
+                    Analizador.listaTokens.add("Token:  MAS---> " + image);    
+                    }
+    |<MENOS:	"-">{System.out.println("Token:  MENOS---> " + image);
+                    Analizador.listaTokens.add("Token:  MENOS---> " + image);
+                    }
+    |<MASMAS:   "++">{System.out.println("Token:  MASMAS---> " + image);
+                    Analizador.listaTokens.add("Token:  MASMAS---> " + image); 
+                    }
+    |<MENOSMENOS:   "--">{System.out.println("Token:  MENOSMENOS---> " + image);
+                    Analizador.listaTokens.add("Token:  MENOSMENOS---> " + image); 
+                    }
+    |<POR:	"*">{System.out.println("Token:  POR---> " + image);
+                    Analizador.listaTokens.add("Token:  POR---> " +image);    
+                    }
+    |<DIVI:	"/">{System.out.println("Token:  DIVISION---> " + image);
+                    Analizador.listaTokens.add("Token:  DIVISION---> " +image);    
+                    }
+    |<MENORK:	"<">{System.out.println("Token:  MENORK---> " + image);
+                    Analizador.listaTokens.add("Token:  MENORK---> " + image);    
+                    }
+    |<MAYORK:	">">{System.out.println("Token:  MAYORK---> " + image);
+                    Analizador.listaTokens.add("Token:  MAYORK---> " + image);    
+                    }
+    |<MENORIGUALK:	"<=">{System.out.println("Token:  MENORIGUALK---> " +image);
+                    Analizador.listaTokens.add("Token:  MENORIGUALK---> " +image);    
+                    }
+    |<MAYORIGUALK:	">=">{System.out.println("Token:  MAYORIGUALK---> " + image);
+                    Analizador.listaTokens.add("Token:  MAYORIGUALK---> " + image);    
+                    }
+    |<ASIG:    "=">{System.out.println("Token:  ASIG---> " + image);
+                    Analizador.listaTokens.add("Token:  ASIG---> " + image);    
+                    }
+    |<IGUALA:	"==">{System.out.println("Token:  IGUALA---> " + image);
+                    Analizador.listaTokens.add("Token:  IGUALA---> " + image);    
+                    }
+    |<DISTINTODE:	"=!">{System.out.println("Token:  DISTINTODE---> " +image);
+                    Analizador.listaTokens.add("Token:  DISTINTODE---> " + image);    
+                    }
+    |<MOD:	"%">{System.out.println("Token:  MOD---> " + image);
+                    Analizador.listaTokens.add("Token:  MOD---> " + image);    
+                    }
+    |<POTEN:	"**">{System.out.println("Token:  POTEN---> " + image);
+                    Analizador.listaTokens.add("Token:  POTEN---> " + image);    
+                    }
+    |<RAIZ:	"//">{System.out.println("Token:  RAIZ---> " + image);
+                    Analizador.listaTokens.add("Token:  RAIZ---> " + image);    
+                    }
+    |<FACTORI:	"!">{System.out.println("Token:  FACTORI---> " + image);
+                    Analizador.listaTokens.add("Token:  FACTORI---> " +image);    
+                    }
+
+}
+
+
+TOKEN:
+{
+    <INT:	"Entero">{System.out.println("Token:  INT---> " + image);
+                        Analizador.listaTokens.add("Token:  INT---> " + image);    
+                        }
+    |<LONG:	"Larg">{System.out.println("Token:  LONG---> " + image);
+                        Analizador.listaTokens.add("Token:  LONG---> " + image);    
+                        }
+    |<FLOAT:	"Flotante">{System.out.println("Token:  FLOAT---> " +image);
+                        Analizador.listaTokens.add("Token:  FLOAT---> " + image);    
+                        }
+    |<DOUBLE:	"Double">{System.out.println("Token:  DOUBLE---> " + image);
+                        Analizador.listaTokens.add("Token:  DOUBLE---> " + image);    
+                        }
+    |<CHAR:	"Caracter">{System.out.println("Token:  CHAR---> " + image);
+                        Analizador.listaTokens.add("Token:  CHAR---> " + image);    
+                        }
+    | <STRING:   "Cadena">{System.out.println("Token:  STRIN--> " + image);
+                        Analizador.listaTokens.add("Token:  STRING---> " + image);    
+                        }
+
+}
+
+TOKEN:
+{
+    <AND:	"&&">{System.out.println("Token:  AND---> " + image);
+                     Analizador.listaTokens.add("Token:  AND---> " + image);    
+                     }
+    |<OR:	"||">{System.out.println("Token:  OR---> " + image);
+                     Analizador.listaTokens.add("Token:  OR---> " + image);    
+                     }
+
+}
+
+TOKEN:
+{
+    <VARIABLE:  <LETRA>(<LETRA>| <CONST> | "_")*>{System.out.println("Token:  VARIABLE---> " + image);
+                        Analizador.listaTokens.add("Token:  VARIABLE---> " +image); 
+                        }
+    |<LETRA:    (["a"-"z"] | ["A"-"Z"])>{System.out.println("Token:  VARIABLE---> " + image);
+                        Analizador.listaTokens.add("Token:  VARIABLE---> " +image);
+                        }
+                        
+    |<CONST:   (["0"-"9"])+>{System.out.println("Token:  CONST---> " + image);
+                        Analizador.listaTokens.add("Token:  CONST---> " + image);    
+                        }
+    | <PUNTO: ".">{System.out.println("Token:  PUNTO---> " + image);
+                        Analizador.listaTokens.add("Token:  PUNTO---> " + image);    
+                        }
+}
+
+SKIP:
+{
+    " "  | "\t" | "\n" | "\r\n" 
+}
+
+void iniciar() :
+{}
+{
+   (sentencias())*<EOF>
+}
+
+void sentencias() :
+{}
+{
+    declaracion01() | funciones() | clases() | sentenciaSI() | ciclos()
+}
+
+
+void declaracion01() :
+{}
+{
+    (tipoDato()<VARIABLE>asigVariable()<PUNTOYCOMA>)
+}
+
+void tipoDato() :
+{}
+{
+    (<INT> | <STRING> | <FLOAT> | <DOUBLE> | <CHAR> | <LONG>) 
+}
+
+void asigVariable() :
+{}
+{
+    <ASIG>(<CONST> | <VARIABLE> | "'"<VARIABLE>"'"| funcionesMate())(operadorMate()(<CONST> |<VARIABLE> |funcionesMate()))*
+    |{return;}
+}
+
+void operadorMate():
+{}
+{
+    <MAS>|<MENOS>|<POR>|<DIVI>|<MOD>|<POTEN>|<RAIZ>|<FACTORI>
+}
+
+void funcionesMate():
+{}
+{
+    <SEN><PARENTESISIZQ>parametros01()<PARENTESISDER>
+    |<COSEN><PARENTESISIZQ>parametros01()<PARENTESISDER>
+    |<TANG><PARENTESISIZQ>parametros01()<PARENTESISDER>
+}
+
+void funciones():
+{}
+{
+    <SHOW><PARENTESISIZQ>((parametros01())+)<PARENTESISDER><PUNTOYCOMA>
+     | <READ><PARENTESISIZQ>(parametros01())+<PARENTESISDER><PUNTOYCOMA>
+     | <WRITE><PARENTESISIZQ>(parametros01())+<PARENTESISDER><PUNTOYCOMA>
+     |<FUNC><VARIABLE><PARENTESISIZQ>((parametros02())*)<PARENTESISDER><LLAVEIZQ>(sentencias())*<LLAVEDER>
+}
+
+void parametros01():
+{}
+{
+    (<VARIABLE> | <CONST>)
+}
+
+void parametros02():
+{}
+{
+    (tipoDato()<VARIABLE> | <VARIABLE>)
+}
+
+void clases():
+{}
+{
+    <CLASS><VARIABLE><LLAVEIZQ>(sentencias() | metodos())*<LLAVEDER>
+}
+
+void metodos():
+{}
+{
+   <METD>tipoDato()<VARIABLE><PARENTESISIZQ>((parametros02())*)<PARENTESISDER><LLAVEIZQ>(sentencias())*(<RETURN><VARIABLE><PUNTOYCOMA>)<LLAVEDER> 
+}
+
+void sentenciaSI():
+{}
+{
+    <IF><PARENTESISIZQ>(condiciones())+<PARENTESISDER><LLAVEIZQ>(sentencias())*<LLAVEDER>(<ELSE><LLAVEIZQ>(sentencias())*<LLAVEDER>)*
+}
+
+void condiciones():
+{}
+{
+    parametros01()operadorCondicional()parametros01()(operadorLogico()condiciones())*
+}
+
+void operadorCondicional():
+{}
+{
+    <MENORK>|<MAYORK>|<MENORIGUALK>|<MAYORIGUALK>|<IGUALA>|<DISTINTODE>
+}
+
+void operadorLogico():
+{}
+{
+    <AND>|<OR>
+}
+
+void ciclos():
+{}
+{
+	(cicloFor() | cicloWhile())
+}
+
+void cicloFor():
+{}
+{
+    <FOR><PARENTESISIZQ>parametrosFor()<PARENTESISDER><LLAVEIZQ>sentenciasCiclos()<LLAVEDER>
+}
+
+void parametrosFor():
+{}
+{
+    parametros02()":"condiciones()":"incrementosDecrementos()
+}
+
+void cicloWhile():
+{}
+{
+    <WHILE><PARENTESISIZQ>condiciones()<PARENTESISDER><LLAVEIZQ>sentenciasCiclos()<LLAVEDER>
+}
+
+void sentenciasCiclos():
+{}
+{
+  (sentencias())*(incrementosDecrementos()<PUNTOYCOMA>)*
+}
+
+void incrementosDecrementos():
+{}
+{
+   (<VARIABLE>(<MASMAS> | <MENOSMENOS>))
+}
+

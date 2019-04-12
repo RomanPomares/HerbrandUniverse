@@ -1,0 +1,92 @@
+options{
+  Ignore_Case = true;
+	static=false;
+}
+
+PARSER_BEGIN(Analizador)
+package compilador;
+import java.util.ArrayList;
+
+public class Analizador {
+  public static ArrayList<String> listaTokens = new ArrayList();
+}
+
+PARSER_END(Analizador)
+ void Input() :
+{}
+{
+ (<IF>|<ELSE>|<>)*
+}
+TOKEN:
+{
+    <INICIO:	"S=">{System.out.println("Token:  INICIO---> " + image);
+                    Analizador.listaTokens.add("Token:  INICIO---> " + image);
+                    }
+    <LLAVEIZQ:	"{">{System.out.println("Token:  LLAVEIZQ---> " + image);
+                    Analizador.listaTokens.add("Token:  LLAVEIZQ---> " + image);
+                    }
+    |<LLAVEDER:	"}">{System.out.println("Token:  LLAVEDER---> " +image);
+                    Analizador.listaTokens.add("Token:  LLAVEDER---> " + image);
+                    }
+    |<PARENTEIZQ:	"(">{System.out.println("Token:  PARENTEIZQ---> " +image);
+                    Analizador.listaTokens.add("Token:  PARENTEIZQ---> " + image);
+                    }
+    |<PARENTEDER:	")">{System.out.println("Token:  PARENTEDER---> " +image);
+                    Analizador.listaTokens.add("Token:  PARENTEDER---> " + image);
+                    }
+    |<COMA:	",">{System.out.println("Token:  COMA---> " +image);
+                    Analizador.listaTokens.add("Token:  COMA---> " + image);
+                    }
+    |<NEGACION:	"¬">{System.out.println("Token:  NEGACION---> " +image);
+                    Analizador.listaTokens.add("Token:  NEGACION---> " + image);
+                    }
+    |<LETRAMAYUS:	(["A"-"Z"])>{System.out.println("Token:  VARIABLE---> " +image);
+                    Analizador.listaTokens.add("Token:  VARIABLE---> " + image);
+                    }
+    |<LETRAMIMUS:	(["a"-"a"])>{System.out.println("Token:  VARIABLE---> " +image);
+                    Analizador.listaTokens.add("Token:  VARIABLE---> " + image);
+                    }
+    |<NUMERO:	(["0"-"9"])+>{System.out.println("Token:  NUMERO---> " +image);
+                    Analizador.listaTokens.add("Token:  NUMERO---> " + image);
+                    }
+}
+SKIP:
+{
+    " "  | "\t" | "\n" | "\r\n"
+}
+
+void iniciar() :
+{}
+{
+   <INICIO><LLAVEIZQ>sentencias()<LLAVEDER><EOF>
+}
+
+void sentencias() :
+{}
+{
+   <LLAVEIZQ>sentencias2()<LLAVEDER>|<LLAVEIZQ>sentencias2()<LLAVEDER><COMA>sentencias()
+}
+
+void sentencias2() :
+{}
+{
+
+}
+
+void predicados() :
+{}
+{
+
+}
+
+void funcion() :
+{}
+{
+
+}
+
+void () :
+{}
+{
+
+}
