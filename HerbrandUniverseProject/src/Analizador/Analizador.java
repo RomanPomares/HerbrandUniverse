@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 public class Analizador implements AnalizadorConstants {
   public static ArrayList<String> listaTokens = new ArrayList();
+  public static ArrayList<String> listaTokensPuros = new ArrayList();
+  public static ArrayList<String> listaFunciones = new ArrayList();
   public static ArrayList<String> listaConstantes = new ArrayList();
-  public static ArrayList<String> listafunciones = new ArrayList();
+  public static ArrayList<String> listaVariables = new ArrayList();
 
   final public void Input() throws ParseException {
     label_1:

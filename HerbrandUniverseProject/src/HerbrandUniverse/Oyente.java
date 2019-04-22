@@ -8,7 +8,6 @@ package HerbrandUniverse;
 import Analizador.ParseException;
 import Analizador.Analizador;
 import Analizador.TokenMgrError;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -20,13 +19,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -48,9 +44,7 @@ public class Oyente extends PanelEvento implements ActionListener {
         switch (opcion) {
             case "Ejecutar":
                 try {
-                    int nivel = (Integer) panel.getSpinnerNivel().getValue();
                     analizar();
-                    generarUniverso(nivel);
                 } catch (ParseException | TokenMgrError | IOException ex) {
                     Logger.getLogger(Oyente.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -108,6 +102,7 @@ public class Oyente extends PanelEvento implements ActionListener {
 
     private void analizar() throws ParseException, TokenMgrError, IOException {
         String archivo_temporal = "C:/Users/Roman Pomares/OneDrive/Documentos/NetBeansProjects/HerbrandUniverseProject/src/Archivos/archivo.txt";
+        //String archivo_temporal = "C:/Users/roman/OneDrive/Documentos/NetBeansProjects/HerbrandUniverseProject/src/Archivos/archivo.txt";
 
         try {
             String[] codigo = panel.getAreaCodigo().getText().split("\n");
@@ -122,10 +117,18 @@ public class Oyente extends PanelEvento implements ActionListener {
             InputStream archivo = new FileInputStream(archivo_temporal);
             Analizador analisis = new Analizador(archivo);
             Analizador.listaTokens.clear();
+            Analizador.listaTokensPuros.clear();
+            Analizador.listaFunciones.clear();
+            Analizador.listaConstantes.clear();
+            Analizador.listaVariables.clear();
             analisis.iniciar();
 
             panel.getAreaResultado().setText(horaEje.toLocaleString() + "\nCompilación exitosa:");
             mostrarResultados();
+
+            //Inicia Algoritmo de Herbrand
+            int nivel = (Integer) panel.getSpinnerNivel().getValue();
+            generarUniverso(nivel);
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Oyente.class.getName()).log(Level.SEVERE, null, ex);
@@ -191,92 +194,56 @@ public class Oyente extends PanelEvento implements ActionListener {
     }
 
     private void generarUniverso(int nivel) {
-        String[] columnNames = {"Nivel:", "Universo:"};
-        Object[][] data
-                = {
-                    {"H0", "{a}"},
-                    {"H1", "H0 + {f(a),g(a)}"},
-                    {"H2", "H1 + {f(f(a)),f(g(a)),g(f(a)),g(g(a))}"},
-                    {"H3", "H2 + {f(f(f(a)),f(f(g(a))),f(g(f(a)))f(g(g(a))),g(f(f(a))),g(f(g(a))),g(g(f(a))),g(g(g(a))))}"}};
 
-        DefaultTableModel model = new DefaultTableModel(data, columnNames);
-        //JTable table = new JTable(model);
-        panel.getTableUniverso().setModel(model);
+        Herbrand n = new Herbrand(Analizador.listaTokensPuros, Analizador.listaFunciones, Analizador.listaConstantes, Analizador.listaVariables);
+        panel.getTableUniverso().setModel(n.HerbrandAlgorithm(nivel));
 
-        List<Object> lista = new ArrayList<>();
-
-        funcion f1 = new funcion("f");
-        f1.getParametros().add(new String("a"));
-        f1.getParametros().add(new String("a"));
-
-        funcion f2 = new funcion("f");
-        f2.getParametros().add(new String("a"));
-        f2.getParametros().add(new String("b"));
-
-        funcion f3 = new funcion("f");
-        f3.getParametros().add(new String("b"));
-        f3.getParametros().add(new String("a"));
-
-        funcion f4 = new funcion("f");
-        f4.getParametros().add(new String("b"));
-        f4.getParametros().add(new String("b"));
-
-        funcion f5 = new funcion("f");
-        f5.getParametros().add(new String("a"));
-        f5.getParametros().add(f1);
-
-        funcion f6 = new funcion("f");
-        f6.getParametros().add(new String("a"));
-        f6.getParametros().add(f2);
-
-        funcion f7 = new funcion("f");
-        f7.getParametros().add(new String("a"));
-        f7.getParametros().add(f3);
-
-        funcion f8 = new funcion("f");
-        f8.getParametros().add(new String("a"));
-        f8.getParametros().add(f4);
-
-        lista.add(new String("a"));
-        lista.add(new String("b"));
-        lista.add(f1);
-        lista.add(f2);
-        lista.add(f3);
-        lista.add(f4);
-        lista.add(f5);
-        lista.add(f6);
-        lista.add(f7);
-        lista.add(f8);
-
+//        List<Object> lista = new ArrayList<>();
+//
+//        funcion f1 = new funcion("f");
+//        f1.getParametros().add(new String("a"));
+//        f1.getParametros().add(new String("a"));
+//
+//        funcion f2 = new funcion("f");
+//        f2.getParametros().add(new String("a"));
+//        f2.getParametros().add(new String("b"));
+//
+//        funcion f3 = new funcion("f");
+//        f3.getParametros().add(new String("b"));
+//        f3.getParametros().add(new String("a"));
+//
+//        funcion f4 = new funcion("f");
+//        f4.getParametros().add(new String("b"));
+//        f4.getParametros().add(new String("b"));
+//
+//        funcion f5 = new funcion("f");
+//        f5.getParametros().add(new String("a"));
+//        f5.getParametros().add(f1);
+//
+//        funcion f6 = new funcion("f");
+//        f6.getParametros().add(new String("a"));
+//        f6.getParametros().add(f2);
+//
+//        funcion f7 = new funcion("f");
+//        f7.getParametros().add(new String("a"));
+//        f7.getParametros().add(f3);
+//
+//        funcion f8 = new funcion("f");
+//        f8.getParametros().add(new String("a"));
+//        f8.getParametros().add(f4);
+//
+//        lista.add(new String("a"));
+//        lista.add(new String("b"));
+//        lista.add(f1);
+//        lista.add(f2);
+//        lista.add(f3);
+//        lista.add(f4);
+//        lista.add(f5);
+//        lista.add(f6);
+//        lista.add(f7);
+//        lista.add(f8);
         //f8.imprimirFuncion();
-        imprimirLista(lista);
-    }
-
-    private void imprimirLista(List<Object> lista) {
-        System.out.print("HU={");
-        for (Object i : lista) {
-            if (i != lista.get(lista.size() - 1)) {
-                if (i.getClass() == String.class) {
-                    String c = (String) i;
-                    System.out.print("" + c + ",");
-                }
-                if (i.getClass() == funcion.class) {
-                    funcion f = (funcion) i;
-                    f.imprimirFuncion();
-                    System.out.print(",");
-                }
-            } else {
-                if (i.getClass() == String.class) {
-                    String c = (String) i;
-                    System.out.print("" + c);
-                }
-                if (i.getClass() == funcion.class) {
-                    funcion f = (funcion) i;
-                    f.imprimirFuncion();
-                }
-            }
-        }
-        System.out.print("}");
+//        imprimirLista(lista);
     }
 
     private void mensajeVersion() {

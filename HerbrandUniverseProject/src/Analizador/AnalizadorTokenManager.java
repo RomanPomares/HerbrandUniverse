@@ -359,62 +359,76 @@ void TokenLexicalActions(Token matchedToken)
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
                          System.out.println("Token:  INICIO---> " + image);
                     Analizador.listaTokens.add("Token:  INICIO---> " + image);
+                    Analizador.listaTokensPuros.add(""+ image);
          break;
       case 2 :
         image.append(jjstrLiteralImages[2]);
         lengthOfMatch = jjstrLiteralImages[2].length();
                          System.out.println("Token:  LLAVEIZQ---> " + image);
                     Analizador.listaTokens.add("Token:  LLAVEIZQ---> " + image);
+                    Analizador.listaTokensPuros.add(""+ image);
          break;
       case 3 :
         image.append(jjstrLiteralImages[3]);
         lengthOfMatch = jjstrLiteralImages[3].length();
                          System.out.println("Token:  LLAVEDER---> " +image);
                     Analizador.listaTokens.add("Token:  LLAVEDER---> " + image);
+                    Analizador.listaTokensPuros.add(""+ image);
          break;
       case 4 :
         image.append(jjstrLiteralImages[4]);
         lengthOfMatch = jjstrLiteralImages[4].length();
                          System.out.println("Token:  PARENTEIZQ---> " +image);
                     Analizador.listaTokens.add("Token:  PARENTEIZQ---> " + image);
+                    Analizador.listaTokensPuros.add(""+ image);
          break;
       case 5 :
         image.append(jjstrLiteralImages[5]);
         lengthOfMatch = jjstrLiteralImages[5].length();
                          System.out.println("Token:  PARENTEDER---> " +image);
                     Analizador.listaTokens.add("Token:  PARENTEDER---> " + image);
+                    Analizador.listaTokensPuros.add(""+ image);
          break;
       case 6 :
         image.append(jjstrLiteralImages[6]);
         lengthOfMatch = jjstrLiteralImages[6].length();
                          System.out.println("Token:  COMA---> " +image);
                     Analizador.listaTokens.add("Token:  COMA---> " + image);
+                    Analizador.listaTokensPuros.add(""+ image);
          break;
       case 7 :
         image.append(jjstrLiteralImages[7]);
         lengthOfMatch = jjstrLiteralImages[7].length();
                          System.out.println("Token:  NEGACION---> " +image);
                     Analizador.listaTokens.add("Token:  NEGACION---> " + image);
+                    Analizador.listaTokensPuros.add(""+ image);
          break;
       case 8 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
                                 System.out.println("Token:  CONSTANTE---> " +image);
                     Analizador.listaTokens.add("Token:  CONSTANTE---> " + image);
+                    Analizador.listaTokensPuros.add(""+ image);
+                    if(!Analizador.listaConstantes.contains(""+image)){Analizador.listaConstantes.add(""+image);}
          break;
       case 9 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
                                      System.out.println("Token:  LETRAPREDICADO---> " +image);
                     Analizador.listaTokens.add("Token:  LETRAPREDICADO---> " + image);
+                    Analizador.listaTokensPuros.add(""+ image);
          break;
       case 10 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
                                       System.out.println("Token:  LETRAVARIABLE---> " +image);
                     Analizador.listaTokens.add("Token:  LETRAVARIABLE---> " + image);
+                    Analizador.listaTokensPuros.add(""+ image);
+                    Analizador.listaVariables.add(""+ image);
          break;
       case 11 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
                                      System.out.println("Token:  LETRAFUNCION---> " +image);
                     Analizador.listaTokens.add("Token:  LETRAFUNCION---> " + image);
+                    Analizador.listaTokensPuros.add(""+ image);
+                    Analizador.listaFunciones.add("" + image);
          break;
       default :
          break;
