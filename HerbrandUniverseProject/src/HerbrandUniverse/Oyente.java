@@ -101,8 +101,8 @@ public class Oyente extends PanelEvento implements ActionListener {
     }
 
     private void analizar() throws ParseException, TokenMgrError, IOException {
-        String archivo_temporal = "C:/Users/Roman Pomares/OneDrive/Documentos/NetBeansProjects/HerbrandUniverseProject/src/Archivos/archivo.txt";
-        //String archivo_temporal = "C:/Users/roman/OneDrive/Documentos/NetBeansProjects/HerbrandUniverseProject/src/Archivos/archivo.txt";
+        //String archivo_temporal = "C:/Users/Roman Pomares/OneDrive/Documentos/NetBeansProjects/HerbrandUniverseProject/src/Archivos/archivo.txt";
+        String archivo_temporal = "C:/Users/roman/OneDrive/Documentos/NetBeansProjects/HerbrandUniverseProject/src/Archivos/archivo.txt";
 
         try {
             String[] codigo = panel.getAreaCodigo().getText().split("\n");

@@ -90,7 +90,13 @@ public class Herbrand {
             String totalPerm = "";
             auxUniverso.clear();
             //El proceso se repite n veces donde n el el numero de niveles
-            for (int ni = 0; ni < nivel; ni++) {
+            for (int ni = 0; ni <= nivel; ni++) {
+                if(ni==0){
+                                for (String strCons : listaConstantes) {
+                    auxUniverso.add(new String(strCons));
+                    
+                }Universo.add(auxUniverso.toString());
+                }else{
                 //Para cada nivel, se comienza agregando las constantes
                 for (String strCons : listaConstantes) {
                     auxUniverso.add(new String(strCons));
@@ -109,7 +115,7 @@ public class Herbrand {
                 al = Arrays.asList(str);
                 auxUniverso = Stream.concat(auxUniverso.stream(), al.stream()).distinct().collect(Collectors.toList());
                 Universo.add(auxUniverso.toString());
-            }
+                }}
 
         }
 
